@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/bottom_bar.dart';
 import 'package:miniproject/components/theme.dart';
-import 'package:miniproject/views/screen_home/screen_home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key});

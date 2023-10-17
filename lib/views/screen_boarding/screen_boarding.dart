@@ -14,10 +14,10 @@ class _BoardingScreenState extends State<BoardingScreen> {
   late PageController _pageController;
   int _pageIndex = 0;
 
-  // @override
-  // void initState() {
-  //   _pageController = PageController(initialPage: 0);
-  // }
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: 0);
+  }
 
   @override
   void dispose() {

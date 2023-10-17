@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:miniproject/components/bottom_bar.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/views/screen_home/screen_home.dart';
 
@@ -28,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 const Text(
                   "Login Account",
                   style: DesignSystem.headlineLarge,
@@ -39,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 30),
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     height: 60,
                     width: 200,
                     child: SvgPicture.asset(
@@ -98,30 +99,29 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()));
+                                    builder: (context) => const BottomBar()));
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: DesignSystem.mainGreen),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      Row(
+                      const Row(
                         children: [
                           Expanded(
-                            child: const Divider(
+                            child: Divider(
                               thickness: 2.0,
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: const Text(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
                               "Or login with",
                               style: DesignSystem.bodySmall,
                             ),
                           ),
                           Expanded(
-                            child: const Divider(
+                            child: Divider(
                               thickness: 2.0,
                             ),
                           ),
@@ -195,17 +195,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
-                Center(
-                  child: const Text(
+                const SizedBox(height: 30),
+                const Center(
+                  child: Text(
                     "The first step towards a healthier life.",
                     style: DesignSystem.bodyMedium,
                   ),
                 ),
-                SizedBox(height: 40),
-                SafeArea(
+                const SizedBox(height: 40),
+                const SafeArea(
                   child: Center(
-                    child: const Text(
+                    child: Text(
                       "Slimsage © 2023",
                       style: DesignSystem.bodySmall,
                     ),

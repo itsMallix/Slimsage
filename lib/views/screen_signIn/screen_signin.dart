@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/bottom_bar.dart';
 import 'package:miniproject/components/theme.dart';
-import 'package:miniproject/viewModels/firebase_auth.dart';
+import 'package:miniproject/models/model_users.dart';
+import 'package:miniproject/viewModels/viewModels_firebase_auth.dart';
+import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_signUp/screen_signup.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key});
@@ -14,6 +18,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  String username = '';
   bool _isSignin = false;
 
   final _formkey = GlobalKey<FormState>();
@@ -31,6 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userManager = Provider.of<UserManager>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -246,6 +252,17 @@ class _SignInScreenState extends State<SignInScreen> {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
     if (user != null) {
+      CollectionReference collRef =
+          FirebaseFirestore.instance.collection('users_account');
+      QuerySnapshot querySnapshot =
+          await collRef.where('email', isEqualTo: email).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        String username = querySnapshot.docs[0]['username'];
+        Provider.of<UserManager>(context, listen: false)
+            .setUserModel(UserModel(username: username));
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Account sign in successfully!"),
@@ -255,10 +272,17 @@ class _SignInScreenState extends State<SignInScreen> {
           context,
           MaterialPageRoute(builder: (context) => const BottomBar()),
           (route) => false);
+    }
+    if (_emailController.text.isEmpty || _passwdController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter your email and password!"),
+        ),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Failed to sign in!"),
+          content: Text("Email or password is incorrect!"),
         ),
       );
     }

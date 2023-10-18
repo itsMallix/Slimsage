@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/bottom_bar.dart';
 import 'package:miniproject/components/theme.dart';
-import 'package:miniproject/viewModels/firebase_auth.dart';
-import 'package:miniproject/views/screen_home/screen_home.dart';
+import 'package:miniproject/models/model_users.dart';
+import 'package:miniproject/viewModels/viewModels_firebase_auth.dart';
+import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_signIn/screen_signin.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key});
@@ -229,18 +232,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const Spacer(),
                   ],
-                  // const Center(
-                  //   child: Text(
-                  //     "The first step towards a healthier life.",
-                  //     style: DesignSystem.bodyMedium,
-                  //   ),
                 ),
-                // const Center(
-                //   child: Text(
-                //     "The first step towards a healthier life.",
-                //     style: DesignSystem.bodyMedium,
-                //   ),
-                // ),
                 const SizedBox(height: 40),
                 const SafeArea(
                   child: Center(
@@ -266,6 +258,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
     if (user != null) {
+      CollectionReference collRef =
+          FirebaseFirestore.instance.collection('users_account');
+      collRef.add({"username": username, "email": email, "password": password});
+
+      // final userModel = UserModel(username: username);
+      Provider.of<UserManager>(context, listen: false)
+          .setUserModel(UserModel(username: username));
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Account created successfully!"),

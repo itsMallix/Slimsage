@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject/firebase_options.dart';
+import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_boarding/screen_boarding.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,17 +13,21 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter SlimSage',
-      theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: DesignSystem.mainGreen),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserManager>(create: (_) => UserManager()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter SlimSage',
+        theme: ThemeData(
+          // colorScheme: ColorScheme.fromSeed(seedColor: DesignSystem.mainGreen),
+          useMaterial3: true,
+        ),
+        home: const BoardingScreen(),
       ),
-      home: const BoardingScreen(),
     );
   }
 }

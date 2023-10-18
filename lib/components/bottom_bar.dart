@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject/components/theme.dart';
+import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_home/screen_home.dart';
 import 'package:miniproject/views/screen_maps/screen_maps.dart';
 import 'package:miniproject/views/screen_meals/screen_meals.dart';
 import 'package:miniproject/views/screen_progress/screen_progress.dart';
 import 'package:miniproject/views/screen_settings/screen_settings.dart';
+import 'package:miniproject/views/screen_signIn/screen_signin.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -34,10 +38,11 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final userModel = Provider.of<UserManager>(context).userModel;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Hello User",
+        title: Text(
+          "Hello ${userModel?.username ?? ''}",
           style: DesignSystem.headlineMedium,
         ),
         actions: [
@@ -46,8 +51,37 @@ class _BottomBarState extends State<BottomBar> {
             icon: const Icon(Icons.notifications),
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.person),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => Container(
+                  height: 500,
+                  width: double.infinity,
+                  child: Column(children: [
+                    const SizedBox(height: 30),
+                    ElevatedButton(
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("You has been logout"),
+                            ),
+                          );
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (contex) => const SignInScreen()),
+                              (route) => false);
+                        },
+                        child: Text(
+                          "Logout",
+                          style: DesignSystem.bodyMedium,
+                        ))
+                  ]),
+                ),
+              );
+            },
+            icon: Icon(Icons.person),
           ),
         ],
       ),

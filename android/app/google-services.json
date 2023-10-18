@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "77143866715",
+    "project_id": "slimsage-6d428",
+    "storage_bucket": "slimsage-6d428.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77143866715:android:1bf08f1aef70d344336e7e",
+        "android_client_info": {
+          "package_name": "com.example.miniproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCua-knZ5GCJ79TdIIx3xD1D5vyo5VIreM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

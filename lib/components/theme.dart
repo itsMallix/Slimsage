@@ -103,6 +103,14 @@ class DesignSystem {
     color: black,
     height: 1.2,
   );
+  static const TextStyle bodyMediumCustom = TextStyle(
+    fontFamily: 'CeraRoundPro',
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
+    letterSpacing: 0.18,
+    color: mainGreen,
+    height: 1.2,
+  );
   static const TextStyle bodySmall = TextStyle(
     fontFamily: 'CeraRoundPro',
     fontWeight: FontWeight.w400,

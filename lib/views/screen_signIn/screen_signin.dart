@@ -1,21 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/bottom_bar.dart';
 import 'package:miniproject/components/theme.dart';
+import 'package:miniproject/viewModels/firebase_auth.dart';
+import 'package:miniproject/views/screen_signUp/screen_signup.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  var _formkey = GlobalKey<FormState>();
+class _SignInScreenState extends State<SignInScreen> {
+  bool _isSignin = false;
+
+  final _formkey = GlobalKey<FormState>();
+  final FirebaseAuthService _auth = FirebaseAuthService();
 
   final _emailController = TextEditingController();
   final _passwdController = TextEditingController();
-  final _unameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwdController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +60,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 90),
                 Form(
                   key: _formkey,
                   child: Column(
                     children: [
-                      TextFormField(
-                        controller: _unameController,
-                        decoration: InputDecoration(
-                          labelText: "Enter username",
-                          labelStyle: DesignSystem.labelLarge,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
                       const SizedBox(height: 10),
                       TextFormField(
                         controller: _emailController,
@@ -91,15 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           child: const Text(
-                            "Login",
+                            "Sign In",
                             style: DesignSystem.headlineMediumWhite,
                           ),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const BottomBar()));
-                          },
+                          onPressed: _signIn,
                           style: ElevatedButton.styleFrom(
                               backgroundColor: DesignSystem.mainGreen),
                         ),
@@ -195,11 +192,35 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 const SizedBox(height: 30),
-                const Center(
-                  child: Text(
-                    "The first step towards a healthier life.",
-                    style: DesignSystem.bodyMedium,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Spacer(),
+                    const Text(
+                      "Don't have an account?",
+                      style: DesignSystem.bodyMedium,
+                    ),
+                    const SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpScreen()),
+                            (route) => false);
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: DesignSystem.bodyMediumCustom,
+                      ),
+                    ),
+                    const Spacer(),
+                  ],
+                  // const Center(
+                  //   child: Text(
+                  //     "The first step towards a healthier life.",
+                  //     style: DesignSystem.bodyMedium,
+                  //   ),
                 ),
                 const SizedBox(height: 40),
                 const SafeArea(
@@ -216,5 +237,30 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _signIn() async {
+    String email = _emailController.text;
+    String password = _passwdController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Account sign in successfully!"),
+        ),
+      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomBar()),
+          (route) => false);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Failed to sign in!"),
+        ),
+      );
+    }
   }
 }

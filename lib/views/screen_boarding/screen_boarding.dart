@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/theme.dart';
-import 'package:miniproject/views/screen_login/screen_login.dart';
+import 'package:miniproject/views/screen_signIn/screen_signin.dart';
 
 class BoardingScreen extends StatefulWidget {
   const BoardingScreen({super.key});
@@ -16,6 +16,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
 
   @override
   void initState() {
+    super.initState();
     _pageController = PageController(initialPage: 0);
   }
 
@@ -35,7 +36,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
+                  builder: (context) => const SignInScreen(),
                 ),
               );
             },
@@ -93,7 +94,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
+                            builder: (context) => const SignInScreen(),
                           ),
                         );
                         // _pageController.nextPage(
@@ -172,7 +173,7 @@ final List<Onboard> onboardData = [
   Onboard(
     image: "assets/images/onBoarding/onBoarding_2.png",
     title: "Welcome to",
-    description: "Diet Adventure",
+    description: "SlimSage to slim your body to be a person sage :v",
   ),
 ];
 

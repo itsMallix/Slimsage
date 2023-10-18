@@ -4,6 +4,7 @@ import 'package:miniproject/views/screen_home/screen_home.dart';
 import 'package:miniproject/views/screen_maps/screen_maps.dart';
 import 'package:miniproject/views/screen_meals/screen_meals.dart';
 import 'package:miniproject/views/screen_progress/screen_progress.dart';
+import 'package:miniproject/views/screen_settings/screen_settings.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -21,6 +22,7 @@ class _BottomBarState extends State<BottomBar> {
     const ProgresScreen(),
     const MealScreen(),
     const MapScreen(),
+    const SettingScreen(),
   ];
 
   void _onTapped(int index) {
@@ -100,6 +102,15 @@ class _BottomBarState extends State<BottomBar> {
                   : DesignSystem.maingrey,
             ),
             label: "Maps",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings,
+              color: _currentIndex == 4
+                  ? DesignSystem.mainGreen
+                  : DesignSystem.maingrey,
+            ),
+            label: "Settings",
           ),
         ],
       ),

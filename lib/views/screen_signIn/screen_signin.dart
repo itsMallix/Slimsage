@@ -36,7 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userManager = Provider.of<UserManager>(context);
+    // final userManager = Provider.of<UserManager>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -84,6 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       const SizedBox(height: 10),
                       TextFormField(
+                        obscureText: true,
                         controller: _passwdController,
                         decoration: InputDecoration(
                           labelText: "Enter password",
@@ -98,13 +99,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         height: 50,
                         width: double.infinity,
                         child: ElevatedButton(
+                          onPressed: _signIn,
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: DesignSystem.mainGreen),
                           child: const Text(
                             "Sign In",
                             style: DesignSystem.headlineMediumWhite,
                           ),
-                          onPressed: _signIn,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: DesignSystem.mainGreen),
                         ),
                       ),
                       const SizedBox(height: 30),
@@ -249,6 +250,20 @@ class _SignInScreenState extends State<SignInScreen> {
     String email = _emailController.text;
     String password = _passwdController.text;
 
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter your email and password!"),
+        ),
+      );
+      return;
+    }
+
+    // Display a circular progress indicator
+    setState(() {
+      _isSignin = true;
+    });
+
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
     if (user != null) {
@@ -260,7 +275,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if (querySnapshot.docs.isNotEmpty) {
         String username = querySnapshot.docs[0]['username'];
         Provider.of<UserManager>(context, listen: false)
-            .setUserModel(UserModel(username: username));
+            .setUserModel(UserModel(username: username, email: email));
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -268,23 +283,64 @@ class _SignInScreenState extends State<SignInScreen> {
           content: Text("Account sign in successfully!"),
         ),
       );
+
+      // Remove the circular progress indicator and navigate to the home screen
+      setState(() {
+        _isSignin = false;
+      });
+
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const BottomBar()),
           (route) => false);
-    }
-    if (_emailController.text.isEmpty || _passwdController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please enter your email and password!"),
-        ),
-      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Email or password is incorrect!"),
         ),
       );
+
+      // Remove the circular progress indicator when login fails
+      setState(() {
+        _isSignin = false;
+      });
     }
   }
+
+  // void _signIn() async {
+  //   String email = _emailController.text;
+  //   String password = _passwdController.text;
+
+  //   User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+  //   if (user != null) {
+  //     CollectionReference collRef =
+  //         FirebaseFirestore.instance.collection('users_account');
+  //     QuerySnapshot querySnapshot =
+  //         await collRef.where('email', isEqualTo: email).get();
+
+  //     if (querySnapshot.docs.isNotEmpty) {
+  //       String username = querySnapshot.docs[0]['username'];
+  //       Provider.of<UserManager>(context, listen: false)
+  //           .setUserModel(UserModel(username: username, email: email));
+  //     }
+
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text("Account sign in successfully!"),
+  //       ),
+  //     );
+  //     Navigator.pushAndRemoveUntil(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => const BottomBar()),
+  //         (route) => false);
+  //   }
+  //   if (_emailController.text.isEmpty || _passwdController.text.isEmpty) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text("Please enter your email and password!"),
+  //       ),
+  //     );
+  //   }
+  // }
 }

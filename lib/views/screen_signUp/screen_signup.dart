@@ -92,6 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const SizedBox(height: 10),
                       TextFormField(
+                        obscureText: true,
                         controller: _passwdController,
                         decoration: InputDecoration(
                           labelText: "Enter password",
@@ -264,18 +265,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       // final userModel = UserModel(username: username);
       Provider.of<UserManager>(context, listen: false)
-          .setUserModel(UserModel(username: username));
+          .setUserModel(UserModel(username: username, email: email));
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Account created successfully!"),
         ),
       );
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(
-          builder: (context) => const BottomBar(),
-        ),
+        MaterialPageRoute(builder: (context) => const BottomBar()),
+        (route) => false,
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

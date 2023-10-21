@@ -5,7 +5,8 @@ import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_home/screen_home.dart';
 import 'package:miniproject/views/screen_maps/screen_maps.dart';
 import 'package:miniproject/views/screen_meals/screen_meals.dart';
-import 'package:miniproject/views/screen_progress/screen_progress.dart';
+import 'package:miniproject/views/screen_progress/screen_progress_empty.dart';
+import 'package:miniproject/views/screen_progress/screen_progress_main.dart';
 import 'package:miniproject/views/screen_settings/screen_settings.dart';
 import 'package:miniproject/views/screen_signIn/screen_signin.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,32 @@ class _BottomBarState extends State<BottomBar> {
                   width: double.infinity,
                   child: Column(children: [
                     const SizedBox(height: 30),
+                    const SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: CircleAvatar(
+                        backgroundColor: DesignSystem.mainBlue,
+                        child: Icon(
+                          Icons.person,
+                          color: DesignSystem.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Sign In As :",
+                      style: DesignSystem.headlineSmall,
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "${userModel?.username}",
+                      style: DesignSystem.bodyLarge,
+                    ),
+                    Text("${userModel?.email}"),
+                    const SizedBox(height: 30),
                     ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: DesignSystem.mainRed),
                         onPressed: () {
                           FirebaseAuth.instance.signOut();
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -75,7 +101,7 @@ class _BottomBarState extends State<BottomBar> {
                         },
                         child: Text(
                           "Logout",
-                          style: DesignSystem.bodyMedium,
+                          style: DesignSystem.headlineMediumWhite,
                         ))
                   ]),
                 ),

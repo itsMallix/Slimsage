@@ -55,12 +55,28 @@ class DesignSystem {
     color: white,
     height: 1.2,
   );
+  static const TextStyle headlineMediumGrey = TextStyle(
+    fontFamily: 'CeraRoundPro',
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+    letterSpacing: 0.27,
+    color: grey,
+    height: 1.2,
+  );
   static const TextStyle headlineSmall = TextStyle(
     fontFamily: 'CeraRoundPro',
     fontWeight: FontWeight.bold,
     fontSize: 16,
     letterSpacing: 0.27,
     color: black,
+    height: 1.2,
+  );
+  static const TextStyle headlineSmallWhite = TextStyle(
+    fontFamily: 'CeraRoundPro',
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+    letterSpacing: 0.27,
+    color: white,
     height: 1.2,
   );
   static const TextStyle titleLarge = TextStyle(
@@ -101,6 +117,14 @@ class DesignSystem {
     fontSize: 14,
     letterSpacing: 0.18,
     color: black,
+    height: 1.2,
+  );
+  static const TextStyle bodyMediumWhite = TextStyle(
+    fontFamily: 'CeraRoundPro',
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    letterSpacing: 0.18,
+    color: white,
     height: 1.2,
   );
   static const TextStyle bodyMediumCustom = TextStyle(
@@ -144,3 +168,5 @@ class DesignSystem {
     height: 1.2,
   );
 }
+
+enum EditMode { ADD, UPDATE }

@@ -296,6 +296,7 @@ class _GenderWidgetState extends State<GenderWidget> {
           GestureDetector(
             onTap: () {
               navigateToResult(12.0);
+              setState(() {});
             },
             child: Container(
               height: 50,
@@ -332,5 +333,6 @@ class _GenderWidgetState extends State<GenderWidget> {
         ),
       ),
     );
+    setState(() {});
   }
 }

@@ -172,8 +172,8 @@ final List<Onboard> onboardData = [
   ),
   Onboard(
     image: "assets/images/onBoarding/onBoarding_2.png",
-    title: "Welcome to",
-    description: "SlimSage to slim your body to be a person sage :v",
+    title: "Welcome to Slimsage",
+    description: "SlimSage to slim your body to be a person sage",
   ),
 ];
 

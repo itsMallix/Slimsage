@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 decoration: BoxDecoration(
                     color: DesignSystem.mainYellow,
-                    borderRadius: BorderRadius.circular(30)),
+                    borderRadius: BorderRadius.circular(20)),
                 height: 150,
                 width: double.infinity,
                 child: Padding(
@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 165,
                       decoration: BoxDecoration(
                         color: DesignSystem.mainBlue,
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 165,
                       decoration: BoxDecoration(
                         color: DesignSystem.mainGreen,
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
@@ -192,58 +192,127 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                height: 100,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    Container(
-                      width: 100,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: DesignSystem.mainRed,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: DesignSystem.mainYellow,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: DesignSystem.mainBlue,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: DesignSystem.black,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: DesignSystem.mainRed,
-                      ),
-                    ),
-                  ],
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 70,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: DesignSystem.secondRed,
+                  ),
+                  child: const Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Icon(Icons.favorite, color: DesignSystem.black),
+                      SizedBox(width: 20),
+                      Text(
+                        "Favorite Meals",
+                        style: DesignSystem.headlineSmall,
+                      )
+                    ],
+                  ),
                 ),
               ),
+              const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 70,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: DesignSystem.secondYellow,
+                  ),
+                  child: const Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Icon(Icons.favorite, color: DesignSystem.black),
+                      SizedBox(width: 20),
+                      Text(
+                        "Favorite Place",
+                        style: DesignSystem.headlineSmall,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 70,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: DesignSystem.secondBlue,
+                  ),
+                  child: const Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Icon(Icons.favorite, color: DesignSystem.black),
+                      SizedBox(width: 20),
+                      Text(
+                        "Tak With Sagee",
+                        style: DesignSystem.headlineSmall,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // SizedBox(
+              //   height: 100,
+              //   child: ListView(
+              //     scrollDirection: Axis.horizontal,
+              //     children: <Widget>[
+              //       Container(
+              //         width: 100,
+              //         height: 70,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(12),
+              //           color: DesignSystem.mainRed,
+              //         ),
+              //       ),
+              //       const SizedBox(width: 10),
+              //       Container(
+              //         width: 100,
+              //         height: 70,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(12),
+              //           color: DesignSystem.mainYellow,
+              //         ),
+              //       ),
+              //       const SizedBox(width: 10),
+              //       Container(
+              //         width: 100,
+              //         height: 70,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(12),
+              //           color: DesignSystem.mainBlue,
+              //         ),
+              //       ),
+              //       const SizedBox(width: 10),
+              //       Container(
+              //         width: 100,
+              //         height: 70,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(12),
+              //           color: DesignSystem.black,
+              //         ),
+              //       ),
+              //       const SizedBox(width: 10),
+              //       Container(
+              //         width: 100,
+              //         height: 70,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(12),
+              //           color: DesignSystem.mainRed,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

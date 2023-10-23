@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter SlimSage',
+        title: 'SlimSage',
         theme: ThemeData(
           useMaterial3: true,
         ),

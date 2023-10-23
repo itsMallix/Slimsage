@@ -11,10 +11,10 @@ class DesignSystem {
   static const Color mainYellow = Color(0xffFFCD62);
   static const Color secondYellow = Color(0xffFFF8EB);
 
-  static const Color white = Color(0xffFFFFFF);
   static const Color black = Color(0xff2a2a2a);
-  static const Color grey = Color(0xffF4F4F4);
+  static const Color white = Color(0xffFFFFFF);
   static const Color maingrey = Color(0xff999999);
+  static const Color grey = Color(0xffF4F4F4);
 
   static const TextTheme textTheme = TextTheme(
     headlineLarge: headlineLarge,

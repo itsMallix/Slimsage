@@ -249,6 +249,7 @@ class _SignInScreenState extends State<SignInScreen> {
   void _signIn() async {
     String email = _emailController.text;
     String password = _passwdController.text;
+    const CircularProgressIndicator();
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -258,7 +259,6 @@ class _SignInScreenState extends State<SignInScreen> {
       );
       return;
     }
-
     // Display a circular progress indicator
     setState(() {
       _isSignin = true;

@@ -82,6 +82,7 @@ flutter:
     - assets/images/homeScreen/
     - assets/images/mealScreen/
     - assets/images/progresScreen/
+    - assets/images/mapScreen/
   fonts:
     - family: CeraRoundPro
       fonts:

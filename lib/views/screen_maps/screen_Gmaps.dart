@@ -71,55 +71,47 @@ class GmapsScreenState extends State<GmapsScreen> {
           mapController = controller;
         },
       ),
-      floatingActionButton: Stack(
-        children: [
-          Positioned(
-            top: 120,
-            right: 12,
-            child: SizedBox(
-              height: 40,
-              width: 150,
-              child: FloatingActionButton(
-                onPressed: () async {
-                  try {
-                    Position value = await _getCurrentLocation();
-                    setState(() {
-                      defaultPosition = LatLng(value.latitude, value.longitude);
-                    });
-                    mapController?.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        CameraPosition(
-                          target: defaultPosition,
-                          zoom: 14.0,
-                        ),
-                      ),
-                    );
-                  } catch (e) {
-                    print('Error: $e');
-                  }
-                },
-                backgroundColor: DesignSystem.black,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.location_on_rounded,
-                        color: DesignSystem.white,
-                      ),
-                      Text(
-                        "Get My Location",
-                        style: DesignSystem.bodyMediumWhite,
-                      ),
-                    ],
+      floatingActionButton: SizedBox(
+        height: 50,
+        width: 150,
+        child: FloatingActionButton(
+          onPressed: () async {
+            try {
+              Position value = await _getCurrentLocation();
+              setState(() {
+                defaultPosition = LatLng(value.latitude, value.longitude);
+              });
+              mapController?.animateCamera(
+                CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target: defaultPosition,
+                    zoom: 14.0,
                   ),
                 ),
-              ),
+              );
+            } catch (e) {
+              print('Error: $e');
+            }
+          },
+          backgroundColor: DesignSystem.black,
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.location_on_rounded,
+                  color: DesignSystem.white,
+                ),
+                Text(
+                  "Get My Location",
+                  style: DesignSystem.bodyMediumWhite,
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

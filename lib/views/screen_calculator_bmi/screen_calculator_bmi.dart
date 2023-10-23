@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miniproject/components/screen_bmi_calcullator/widget_gender.dart';
 import 'package:miniproject/components/theme.dart';
 
 class BmiScreen extends StatelessWidget {
@@ -16,9 +17,10 @@ class BmiScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(12),
-          child: Card(
-            elevation: 12,
-            shape: const RoundedRectangleBorder(),
+          child: Column(
+            children: [
+              GenderWidget(),
+            ],
           ),
         ),
       ),

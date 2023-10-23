@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/views/screen_calculator_bmi/screen_calculator_bmi.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_item.dart';
-import 'package:miniproject/views/screen_recommendation/screen_recommendation.dart';
+import 'package:miniproject/views/screen_recommendation/screen_home_recommendation.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

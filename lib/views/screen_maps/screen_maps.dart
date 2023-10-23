@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:miniproject/components/screen_maps/maps_most_visited.dart';
+import 'package:miniproject/components/screen_maps/maps_popular.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/views/screen_maps/screen_Gmaps.dart';
 
@@ -10,7 +13,6 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final List<String> _place_1 = ["1", "2", "3"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +40,62 @@ class _MapScreenState extends State<MapScreen> {
                 height: 100,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: DesignSystem.black,
-                  borderRadius: BorderRadius.circular(12),
+                  color: DesignSystem.mainRed,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 10),
+                    SizedBox(
+                      height: 90,
+                      width: 90,
+                      child: SvgPicture.asset(
+                          "assets/images/mapScreen/compass.svg"),
+                    ),
+                    const SizedBox(width: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const SizedBox(
+                            // height: 0,
+                            width: 200,
+                            child: Text(
+                              "Discover Fitness Center Near You Easily",
+                              style: DesignSystem.headlineSmallWhite,
+                              textAlign: TextAlign.end,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const GmapsScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 30,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: DesignSystem.mainYellow,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Text(
+                                "Find Place",
+                                style: DesignSystem.headlineSmallWhite,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 10),
@@ -48,83 +104,14 @@ class _MapScreenState extends State<MapScreen> {
                 style: DesignSystem.headlineSmall,
               ),
               const SizedBox(height: 10),
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  itemCount: _place_1.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: const ClampingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Card(
-                      child: Container(
-                        height: 200,
-                        width: 250,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(10)),
-                                child: Image.asset(
-                                  "assets/images/test.png",
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Row(
-                                children: [
-                                  const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Ini Title Test",
-                                        style: DesignSystem.headlineMedium,
-                                      ),
-                                      Text(
-                                        "ini sub titele Test",
-                                        style: DesignSystem.bodyLarge,
-                                      ),
-                                      Text(
-                                        "ini deskripsi test",
-                                        style: DesignSystem.bodyMedium,
-                                      ),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: DesignSystem.mainGreen,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: const Text(
-                                      "Detail",
-                                      style: DesignSystem.bodyMediumWhite,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 20),
+              const BuildPopularPlace(),
+              const SizedBox(height: 10),
               const Text(
-                "Popular Indoor Place",
+                "Most Visited Places",
                 style: DesignSystem.headlineSmall,
               ),
+              const SizedBox(height: 10),
+              const BuildMostVisited(),
             ],
           ),
         ),

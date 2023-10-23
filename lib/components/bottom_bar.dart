@@ -5,6 +5,7 @@ import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_home/screen_home.dart';
 import 'package:miniproject/views/screen_maps/screen_maps.dart';
 import 'package:miniproject/views/screen_meals/screen_meals.dart';
+import 'package:miniproject/views/screen_meals/screen_planner_meals.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_empty.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_main.dart';
 import 'package:miniproject/views/screen_settings/screen_settings.dart';
@@ -26,6 +27,7 @@ class _BottomBarState extends State<BottomBar> {
     const HomeScreen(),
     const ProgresScreen(),
     const MealScreen(),
+    // MealPlanScreen(),
     const MapScreen(),
     const SettingScreen(),
   ];

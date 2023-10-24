@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject/components/theme.dart';
+import 'package:miniproject/models/maps_models/maps_favorite_provider.dart';
+import 'package:miniproject/views/screen_favorite/screen_favorite_places.dart';
+import 'package:miniproject/views/screen_maps/screen_Gmaps_detail.dart';
+import 'package:provider/provider.dart';
 
 class MapDetailScreen extends StatelessWidget {
   final QueryDocumentSnapshot placeData;
@@ -8,6 +12,7 @@ class MapDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PlaceFavoriteProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -85,6 +90,19 @@ class MapDetailScreen extends StatelessWidget {
                   Text(
                     placeData['rating'],
                     style: DesignSystem.bodyMedium,
+                  ),
+                  const SizedBox(width: 10),
+                  IconButton(
+                    onPressed: () {
+                      provider.toggleFavorite(placeData);
+                    },
+                    icon: Icon(
+                      Icons.favorite_rounded,
+                      color: provider.isExist(placeData) ||
+                              provider.places.contains(placeData)
+                          ? DesignSystem.mainRed
+                          : DesignSystem.maingrey,
+                    ),
                   ),
                 ],
               ),
@@ -168,7 +186,18 @@ class MapDetailScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GmapsScreenDetail(
+                          name: placeData['name'],
+                          latitude: placeData['latitude'],
+                          longitude: placeData['longitude'],
+                        ),
+                      ),
+                    );
+                  },
                   child: const Text(
                     "Show On Map",
                     style: DesignSystem.headlineSmallWhite,

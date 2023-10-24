@@ -72,6 +72,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       TextFormField(
                         controller: _unameController,
                         decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            Icons.person_rounded,
+                            color: DesignSystem.maingrey,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: DesignSystem.mainBlue, width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           labelText: "Enter username",
                           labelStyle: DesignSystem.labelLarge,
                           border: OutlineInputBorder(
@@ -83,6 +92,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            Icons.email_rounded,
+                            color: DesignSystem.maingrey,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: DesignSystem.mainBlue, width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           labelText: "Enter email",
                           labelStyle: DesignSystem.labelLarge,
                           border: OutlineInputBorder(
@@ -95,6 +113,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         obscureText: true,
                         controller: _passwdController,
                         decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            Icons.lock_rounded,
+                            color: DesignSystem.maingrey,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: DesignSystem.mainBlue, width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           labelText: "Enter password",
                           labelStyle: DesignSystem.labelLarge,
                           border: OutlineInputBorder(

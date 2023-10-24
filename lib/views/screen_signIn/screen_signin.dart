@@ -20,6 +20,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   String username = '';
   bool _isSignin = false;
+  bool obscureText = true;
 
   final _formkey = GlobalKey<FormState>();
   final FirebaseAuthService _auth = FirebaseAuthService();
@@ -75,6 +76,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: DesignSystem.mainBlue, width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.email_rounded,
+                            color: DesignSystem.maingrey,
+                          ),
                           labelText: "Enter email",
                           labelStyle: DesignSystem.labelLarge,
                           border: OutlineInputBorder(
@@ -84,9 +94,31 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       const SizedBox(height: 10),
                       TextFormField(
-                        obscureText: true,
+                        obscureText: obscureText,
                         controller: _passwdController,
                         decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: DesignSystem.mainBlue, width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          prefixIcon: const Icon(Icons.lock_rounded,
+                              color: DesignSystem.maingrey),
+                          suffixIcon: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  obscureText = false;
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.remove_red_eye_rounded,
+                                color: DesignSystem.maingrey,
+                              ),
+                            ),
+                          ),
                           labelText: "Enter password",
                           labelStyle: DesignSystem.labelLarge,
                           border: OutlineInputBorder(

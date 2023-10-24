@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/views/screen_calculator_bmi/screen_calculator_bmi.dart';
+import 'package:miniproject/views/screen_favorite/screen_favorite_places.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_item.dart';
 import 'package:miniproject/views/screen_recommendation/screen_home_recommendation.dart';
 
@@ -204,7 +205,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Row(
                     children: [
                       SizedBox(width: 20),
-                      Icon(Icons.favorite, color: DesignSystem.black),
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundColor: DesignSystem.mainRed,
+                        child: Icon(
+                          Icons.kebab_dining_rounded,
+                          color: DesignSystem.white,
+                        ),
+                      ),
                       SizedBox(width: 20),
                       Text(
                         "Favorite Meals",
@@ -216,7 +224,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FavoritePlaceScreen(),
+                    ),
+                  );
+                },
                 child: Container(
                   height: 70,
                   width: double.infinity,
@@ -227,7 +242,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Row(
                     children: [
                       SizedBox(width: 20),
-                      Icon(Icons.favorite, color: DesignSystem.black),
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundColor: DesignSystem.mainYellow,
+                        child: Icon(
+                          Icons.home_work_rounded,
+                          color: DesignSystem.white,
+                        ),
+                      ),
                       SizedBox(width: 20),
                       Text(
                         "Favorite Place",
@@ -250,10 +272,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Row(
                     children: [
                       SizedBox(width: 20),
-                      Icon(Icons.favorite, color: DesignSystem.black),
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundColor: DesignSystem.mainBlue,
+                        child: Icon(
+                          Icons.chat_rounded,
+                          color: DesignSystem.white,
+                        ),
+                      ),
                       SizedBox(width: 20),
                       Text(
-                        "Tak With Sagee",
+                        "Talk With Sagy",
                         style: DesignSystem.headlineSmall,
                       )
                     ],
@@ -261,58 +290,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              // SizedBox(
-              //   height: 100,
-              //   child: ListView(
-              //     scrollDirection: Axis.horizontal,
-              //     children: <Widget>[
-              //       Container(
-              //         width: 100,
-              //         height: 70,
-              //         decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(12),
-              //           color: DesignSystem.mainRed,
-              //         ),
-              //       ),
-              //       const SizedBox(width: 10),
-              //       Container(
-              //         width: 100,
-              //         height: 70,
-              //         decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(12),
-              //           color: DesignSystem.mainYellow,
-              //         ),
-              //       ),
-              //       const SizedBox(width: 10),
-              //       Container(
-              //         width: 100,
-              //         height: 70,
-              //         decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(12),
-              //           color: DesignSystem.mainBlue,
-              //         ),
-              //       ),
-              //       const SizedBox(width: 10),
-              //       Container(
-              //         width: 100,
-              //         height: 70,
-              //         decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(12),
-              //           color: DesignSystem.black,
-              //         ),
-              //       ),
-              //       const SizedBox(width: 10),
-              //       Container(
-              //         width: 100,
-              //         height: 70,
-              //         decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(12),
-              //           color: DesignSystem.mainRed,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),

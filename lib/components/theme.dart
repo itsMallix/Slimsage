@@ -7,9 +7,9 @@ class DesignSystem {
   static const Color mainRed = Color(0xffFF8473);
   static const Color secondRed = Color(0xffFFC0B8);
   static const Color mainBlue = Color(0xff8680D4);
-  static const Color secondBlue = Color(0xffA3A0CA);
+  static const Color secondBlue = Color(0xffC2BEFF);
   static const Color mainYellow = Color(0xffFFCD62);
-  static const Color secondYellow = Color(0xffFFF8EB);
+  static const Color secondYellow = Color(0xffFFF1D6);
 
   static const Color black = Color(0xff2a2a2a);
   static const Color white = Color(0xffFFFFFF);

@@ -40,7 +40,7 @@ class _MapScreenState extends State<MapScreen> {
                 height: 100,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: DesignSystem.mainRed,
+                  color: DesignSystem.black,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Row(
@@ -63,7 +63,7 @@ class _MapScreenState extends State<MapScreen> {
                             // height: 0,
                             width: 200,
                             child: Text(
-                              "Discover Fitness Center Near You Easily",
+                              "Discover Favorite Fitness Center Near You Easily",
                               style: DesignSystem.headlineSmallWhite,
                               textAlign: TextAlign.end,
                             ),
@@ -81,13 +81,13 @@ class _MapScreenState extends State<MapScreen> {
                             child: Container(
                               alignment: Alignment.center,
                               height: 30,
-                              width: 100,
+                              width: 130,
                               decoration: BoxDecoration(
                                 color: DesignSystem.mainYellow,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: const Text(
-                                "Find Place",
+                                "My Favorite",
                                 style: DesignSystem.headlineSmallWhite,
                               ),
                             ),

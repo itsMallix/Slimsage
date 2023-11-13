@@ -13,7 +13,7 @@ package="com.example.miniproject">
         android:icon="@mipmap/ic_launcher">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyDnNrvxUelBjJHXe2PHsQTRdgssqZ_7U0g" />
+           android:value="YOUR_GOOGLEMAP_APIKEY" />
 
 
         <activity

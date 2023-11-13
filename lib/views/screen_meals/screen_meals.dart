@@ -1,11 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/theme.dart';
-import 'package:miniproject/models/model_diet_category.dart';
-import 'package:miniproject/models/model_meals_plans.dart';
-import 'package:miniproject/utils/api_service.dart';
-import 'package:miniproject/views/screen_meals/screen_more_meals.dart';
-import 'package:miniproject/views/screen_meals/screen_planner_meals.dart';
+import 'package:miniproject/models/meals_models/model_diet_category.dart';
+import 'package:miniproject/models/meals_models/model_meals.dart';
+import 'package:miniproject/views/screen_favorite/screen_favorite_meals.dart';
+import 'package:miniproject/views/screen_meals/screen_meals_list.dart';
 
 class MealScreen extends StatefulWidget {
   const MealScreen({Key? key}) : super(key: key);
@@ -53,14 +53,31 @@ class _MealScreenState extends State<MealScreen> {
       title: "Whole30",
     ),
   ];
-  double _targetCalories = 2250;
-  String _diet = 'None';
 
-  void _serachMealPlan() async {
-    MealPlan mealPlan = await ApiService.instance.generateMealPlan(
-      targetCalories: _targetCalories.toInt(),
-      diet: _diet,
-    );
+  List<MealsModel> meals = [];
+
+  Future<void> fetchMealsByDiet(String diet) async {
+    try {
+      final response = await Dio().get(
+        'https://api.spoonacular.com/recipes/complexSearch?apiKey=95a614b6dc2a457eb00cac031302195b&diet=$diet',
+      );
+      final data = response.data;
+      final results = data['results'] as List<dynamic>;
+      final fetchMelas = results.map(
+        (meal) {
+          return MealsModel(
+            id: meal['id'],
+            title: meal['title'],
+            image: meal['image'],
+          );
+        },
+      ).toList();
+      setState(() {
+        meals = fetchMelas;
+      });
+    } catch (err) {
+      print('Error fetching recipes: $err');
+    }
   }
 
   @override
@@ -72,11 +89,149 @@ class _MealScreenState extends State<MealScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
+              SizedBox(
+                height: 100,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      width: 250,
+                      height: 70,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(100),
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
+                        color: DesignSystem.mainYellow,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(10),
+                                child: SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    "Embark on Your Healthy Journey",
+                                    style: DesignSystem.headlineSmallWhite,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: SizedBox(
+                                  width: 70,
+                                  height: 70,
+                                  child: SvgPicture.asset(
+                                    "assets/images/mealScreen/slide_1.svg",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      width: 250,
+                      height: 70,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(100),
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
+                        color: DesignSystem.mainBlue,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(10),
+                                child: SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    "Eat Smart, Live Better And More Better",
+                                    style: DesignSystem.headlineSmallWhite,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: SizedBox(
+                                  width: 70,
+                                  height: 70,
+                                  child: SvgPicture.asset(
+                                    "assets/images/mealScreen/slide_2.svg",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      width: 250,
+                      height: 70,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(100),
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
+                        color: DesignSystem.mainGreen,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(10),
+                                child: SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    "Achieve Your Wellness Goals with Us",
+                                    style: DesignSystem.headlineSmallWhite,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: SizedBox(
+                                  width: 70,
+                                  height: 70,
+                                  child: SvgPicture.asset(
+                                    "assets/images/mealScreen/slide_3.svg",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
               Container(
                 height: 90,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: DesignSystem.mainBlue,
+                  color: DesignSystem.mainRed,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Padding(
@@ -97,11 +252,22 @@ class _MealScreenState extends State<MealScreen> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: DesignSystem.white,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(7),
+                                  borderRadius: BorderRadius.circular(7.0),
                                 ),
                               ),
-                              onPressed: () {},
-                              child: const Text("My Favorite"),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FavoriteMealScreen(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                "My Favorite",
+                                style: DesignSystem.bodyMedium,
+                              ),
                             ),
                           )
                         ],
@@ -118,73 +284,14 @@ class _MealScreenState extends State<MealScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 200,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MealPlanScreen()),
-                        );
-                      },
-                      child: Container(
-                        width: 250,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: DesignSystem.mainRed,
-                        ),
-                        child: const Text("kategori 1"),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 250,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: DesignSystem.mainYellow,
-                      ),
-                      child: const Text("kategori 2"),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 250,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: DesignSystem.mainBlue,
-                      ),
-                      child: const Text("kategori 3"),
-                    ),
-                  ],
-                ),
-              ),
               const SizedBox(height: 10),
-              Row(
+              const Row(
                 children: [
-                  const Text(
+                  Text(
                     "Good For Diet",
                     style: DesignSystem.headlineSmall,
                   ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const MoreMeals();
-                      }));
-                    },
-                    child: const Text(
-                      "See All",
-                      style: DesignSystem.bodyMedium,
-                    ),
-                  )
+                  Spacer(),
                 ],
               ),
               GridView.builder(
@@ -198,7 +305,19 @@ class _MealScreenState extends State<MealScreen> {
                 itemCount: dietCategoryList.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      final selectedDiet = dietCategoryList[index].title;
+
+                      fetchMealsByDiet(selectedDiet);
+                      setState(() {});
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MealListScreen(meals: meals),
+                        ),
+                      );
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/views/screen_calculator_bmi/screen_calculator_bmi.dart';
+import 'package:miniproject/views/screen_favorite/screen_favorite_meals.dart';
 import 'package:miniproject/views/screen_favorite/screen_favorite_places.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_item.dart';
 import 'package:miniproject/views/screen_recommendation/screen_home_recommendation.dart';
@@ -22,19 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const SizedBox(
-                height: 45,
-                width: double.infinity,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons.search),
-                    fillColor: DesignSystem.grey,
-                    filled: true,
-                    hintText: "Search Menu",
-                  ),
-                ),
-              ),
               const SizedBox(height: 24),
               Container(
                 decoration: BoxDecoration(
@@ -194,7 +182,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FavoriteMealScreen(),
+                    ),
+                  );
+                },
                 child: Container(
                   height: 70,
                   width: double.infinity,
@@ -228,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => FavoritePlaceScreen(),
+                      builder: (context) => const FavoritePlaceScreen(),
                     ),
                   );
                 },
@@ -260,35 +255,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 70,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: DesignSystem.secondBlue,
-                  ),
-                  child: const Row(
-                    children: [
-                      SizedBox(width: 20),
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: DesignSystem.mainBlue,
-                        child: Icon(
-                          Icons.chat_rounded,
-                          color: DesignSystem.white,
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Text(
-                        "Talk With Sagy",
-                        style: DesignSystem.headlineSmall,
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {},
+              //   child: Container(
+              //     height: 70,
+              //     width: double.infinity,
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(20),
+              //       color: DesignSystem.secondBlue,
+              //     ),
+              //     child: const Row(
+              //       children: [
+              //         SizedBox(width: 20),
+              //         CircleAvatar(
+              //           radius: 20,
+              //           backgroundColor: DesignSystem.mainBlue,
+              //           child: Icon(
+              //             Icons.chat_rounded,
+              //             color: DesignSystem.white,
+              //           ),
+              //         ),
+              //         SizedBox(width: 20),
+              //         Text(
+              //           "Talk With Sagy",
+              //           style: DesignSystem.headlineSmall,
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
             ],
           ),

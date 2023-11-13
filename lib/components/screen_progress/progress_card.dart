@@ -36,6 +36,19 @@ class ProgressCard extends StatelessWidget {
                     ),
                   ),
                 ),
+              if (progress.imagePath!.isEmpty)
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: DesignSystem.grey,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Icon(
+                    Icons.image,
+                    color: DesignSystem.maingrey,
+                  ),
+                ),
               const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

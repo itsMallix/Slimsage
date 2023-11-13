@@ -16,6 +16,7 @@ class RecommendationResultScreen extends StatelessWidget {
           "Recommendation Result",
           style: DesignSystem.headlineMedium,
         ),
+        leading: const BackButton(color: DesignSystem.black),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -42,7 +43,7 @@ class RecommendationResultScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 30),
+                    const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -62,13 +63,10 @@ class RecommendationResultScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Text(
-                "Workout Recommendation",
-                style: DesignSystem.headlineSmall,
-              ),
               const SizedBox(height: 20),
               Text(
                 gptResponseData.choices[0].text,
+                style: DesignSystem.bodyLarge,
                 textAlign: TextAlign.start,
               )
             ],

@@ -23,6 +23,7 @@ class EmptyProgresScreen extends StatelessWidget {
                   height: 200,
                 ),
               ),
+              const SizedBox(height: 20),
               const Text(
                 "No Progress Found",
                 style: DesignSystem.bodyLarge,

@@ -33,7 +33,7 @@ class RecommendationService {
       String bodyWeight = weight;
 
       String prompData =
-          "Kamu adalah seorang ahli kebugaran, berikan saya beberapa rekomendasi workout dengan tinggi badan $height dan berat badan $bodyWeight dengan hitungan setiap resp";
+          "Berikan saya 3 rekomendasi workout dengan tinggi badan $height dan berat badan $bodyWeight dengan hitungan setiap resp, yang bisa dilakukan selama 1 minggu, berikan juga saran ketika melakukan gerakannya";
       final data = jsonEncode({
         "model": "text-davinci-003",
         "prompt": prompData,

@@ -8,7 +8,7 @@ package="com.example.miniproject">
     
     <!-- android:requestLegacyEksternalStorage="true" -->
     <application
-        android:label="miniproject"
+        android:label="Slimsage"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

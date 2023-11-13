@@ -17,7 +17,7 @@ class BmiScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(12),
-          child: Column(
+          child: const Column(
             children: [
               GenderWidget(),
             ],

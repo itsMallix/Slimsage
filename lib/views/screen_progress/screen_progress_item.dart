@@ -116,12 +116,6 @@ class _ProgressItemState extends State<ProgressItem> {
             },
             icon: const Icon(Icons.insert_photo),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(Icons.delete),
-          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -140,7 +134,8 @@ class _ProgressItemState extends State<ProgressItem> {
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
                         child: Image.file(File(imageFile!.path),
-                            fit: BoxFit.cover))
+                            fit: BoxFit.cover),
+                      )
                     : const Icon(
                         Icons.image_outlined,
                         color: DesignSystem.black,

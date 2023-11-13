@@ -5,7 +5,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:miniproject/components/theme.dart';
 
 class GmapsScreen extends StatefulWidget {
-  const GmapsScreen({Key? key});
+  const GmapsScreen({
+    super.key,
+  });
 
   @override
   State<GmapsScreen> createState() => GmapsScreenState();
@@ -31,11 +33,20 @@ class GmapsScreenState extends State<GmapsScreen> {
     super.dispose();
   }
 
-  void _showInfoBottomSheet(BuildContext context, String name) {
+  void _showInfoBottomSheet(
+      BuildContext context,
+      String name,
+      String image,
+      String rating,
+      String open,
+      String close,
+      String address,
+      double latitude,
+      double longitude) {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        height: 300,
+        height: 400,
         width: double.infinity,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -45,9 +56,74 @@ class GmapsScreenState extends State<GmapsScreen> {
         ),
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Name: $name"),
+            Container(
+              height: 120,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(image, fit: BoxFit.cover)),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                const Icon(
+                  Icons.maps_home_work_rounded,
+                  color: DesignSystem.mainBlue,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  name,
+                  style: DesignSystem.headlineMedium,
+                ),
+                const Spacer(),
+                const Icon(
+                  Icons.star_rounded,
+                  color: DesignSystem.mainYellow,
+                ),
+                Text(
+                  rating,
+                  style: DesignSystem.bodyLarge,
+                )
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                const Icon(
+                  Icons.location_on_rounded,
+                  color: DesignSystem.mainBlue,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '$latitude, $longitude',
+                  style: DesignSystem.bodyMedium,
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                const Icon(
+                  Icons.timelapse_rounded,
+                  color: DesignSystem.mainBlue,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '$open - $close',
+                  style: DesignSystem.bodyMedium,
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              address,
+              style: DesignSystem.bodyLarge,
+            ),
           ],
         ),
       ),
@@ -76,6 +152,11 @@ class GmapsScreenState extends State<GmapsScreen> {
       double latitude = doc['latitude'];
       double longitude = doc['longitude'];
       String name = doc['name'];
+      String image = doc['image'];
+      String rating = doc['rating'];
+      String open = doc['open'];
+      String close = doc['close'];
+      String address = doc['address'];
 
       LatLng coordinate = LatLng(latitude, longitude);
       markers.add(
@@ -85,7 +166,8 @@ class GmapsScreenState extends State<GmapsScreen> {
           infoWindow: InfoWindow(
             title: name,
             onTap: () {
-              _showInfoBottomSheet(context, name);
+              _showInfoBottomSheet(context, name, image, rating, open, close,
+                  address, latitude, longitude);
             },
           ),
         ),
@@ -98,6 +180,11 @@ class GmapsScreenState extends State<GmapsScreen> {
       double latitude = doc['latitude'];
       double longitude = doc['longitude'];
       String name = doc['name'];
+      String image = doc['image'];
+      String rating = doc['rating'];
+      String open = doc['open'];
+      String close = doc['close'];
+      String address = doc['address'];
 
       LatLng coordinate = LatLng(latitude, longitude);
       markers.add(
@@ -107,7 +194,8 @@ class GmapsScreenState extends State<GmapsScreen> {
           infoWindow: InfoWindow(
             title: name,
             onTap: () {
-              _showInfoBottomSheet(context, name);
+              _showInfoBottomSheet(context, name, image, rating, open, close,
+                  address, latitude, longitude);
             },
           ),
         ),
@@ -138,9 +226,7 @@ class GmapsScreenState extends State<GmapsScreen> {
           ),
         ),
       );
-      // throw 'Location permissions are permanently denied';
     }
-
     return await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
@@ -152,8 +238,8 @@ class GmapsScreenState extends State<GmapsScreen> {
       appBar: AppBar(
         title: const Text(
           "Search a Place",
+          style: DesignSystem.headlineMedium,
         ),
-        centerTitle: true,
       ),
       body: FutureBuilder<Set<Marker>>(
         future: _placeMarker(),

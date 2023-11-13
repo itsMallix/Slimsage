@@ -1,10 +1,9 @@
-import 'dart:ui';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject/firebase_options.dart';
 import 'package:miniproject/models/database_models/database_provider.dart';
 import 'package:miniproject/models/maps_models/maps_favorite_provider.dart';
+import 'package:miniproject/models/meals_models/meals_favorite_provider.dart';
 import 'package:miniproject/models/progress_models/progress_provider.dart';
 import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_boarding/screen_splash.dart';
@@ -22,11 +21,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<MealFavoriteProvider>(
+          create: (_) => MealFavoriteProvider(),
+        ),
         ChangeNotifierProvider<ProgressProvider>(
-            create: (_) => ProgressProvider()),
-        ChangeNotifierProvider(create: (_) => DbManager()),
-        ChangeNotifierProvider(create: (_) => PlaceFavoriteProvider()),
-        ChangeNotifierProvider<UserManager>(create: (_) => UserManager()),
+          create: (_) => ProgressProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DbManager(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PlaceFavoriteProvider(),
+        ),
+        ChangeNotifierProvider<UserManager>(
+          create: (_) => UserManager(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

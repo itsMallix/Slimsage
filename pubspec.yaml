@@ -52,6 +52,12 @@ dependencies:
   path_provider: ^2.1.1
   sqflite: ^2.3.0
   envied: ^0.3.0+3
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/Slimsage.png"
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +93,7 @@ flutter:
     - assets/images/progresScreen/
     - assets/images/mapScreen/
     - assets/images/openAiScreen/
+    - assets/images/bmiScreen/
   fonts:
     - family: CeraRoundPro
       fonts:

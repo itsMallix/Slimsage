@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:miniproject/components/theme.dart';
+import 'package:miniproject/views/screen_calculator_bmi/screen_calculator_bmi.dart';
 
 class BmiResultScreen extends StatefulWidget {
-  String result;
-  String message;
-  String description;
+  final String result;
+  final String message;
+  final String description;
 
-  BmiResultScreen({
-    super.key,
+  const BmiResultScreen({
+    Key? key,
     required this.result,
     required this.message,
     required this.description,
-  });
+  }) : super(key: key);
 
   @override
   State<BmiResultScreen> createState() => _BmiResultScreenState();
 }
 
 class _BmiResultScreenState extends State<BmiResultScreen> {
+  void intiState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +30,16 @@ class _BmiResultScreenState extends State<BmiResultScreen> {
         title: const Text(
           "Body Mass Index Result",
           style: DesignSystem.headlineMedium,
+        ),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const BmiScreen(),
+              ),
+            );
+          },
         ),
       ),
       body: Padding(
@@ -44,21 +59,10 @@ class _BmiResultScreenState extends State<BmiResultScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "' ${widget.result} '",
+                  widget.result,
                   style: DesignSystem.headlineLarge,
                 ),
                 const SizedBox(height: 20),
-                Container(
-                  alignment: Alignment.center,
-                  height: 40,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: DesignSystem.secondBlue,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Text(widget.message,
-                      style: DesignSystem.headlineMediumWhite),
-                ),
-                const SizedBox(height: 50),
                 Container(
                   padding: const EdgeInsets.all(8),
                   child: Text(
@@ -72,7 +76,12 @@ class _BmiResultScreenState extends State<BmiResultScreen> {
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BmiScreen(),
+                  ),
+                );
               },
               child: Container(
                 height: 50,
@@ -80,14 +89,14 @@ class _BmiResultScreenState extends State<BmiResultScreen> {
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: DesignSystem.mainGreen,
+                    color: DesignSystem.mainBlue,
                     borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "Recalculate",
                   style: DesignSystem.headlineSmallWhite,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

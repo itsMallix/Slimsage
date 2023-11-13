@@ -35,7 +35,7 @@ class _RecommendScreenState extends State<RecommendScreen> {
         });
       }
 
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => RecommendationResultScreen(
@@ -192,6 +192,14 @@ class _RecommendScreenState extends State<RecommendScreen> {
                       backgroundColor: DesignSystem.black,
                     ),
                     onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const Center(
+                          child: CircularProgressIndicator(
+                            color: DesignSystem.mainGreen,
+                          ),
+                        ),
+                      );
                       if (_formKey.currentState!.validate()) {
                         _getRecommendations();
                       }

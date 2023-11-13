@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/bottom_bar.dart';
 import 'package:miniproject/components/theme.dart';
-import 'package:miniproject/models/model_users.dart';
+import 'package:miniproject/models/user_models/model_users.dart';
 import 'package:miniproject/viewModels/viewModels_firebase_auth.dart';
 import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_signUp/screen_signup.dart';
@@ -37,11 +37,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final userManager = Provider.of<UserManager>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          // Gunakan SingleChildScrollView
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -49,7 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 const SizedBox(height: 20),
                 const Text(
-                  "Login Account",
+                  "Sign In Account",
                   style: DesignSystem.headlineLarge,
                 ),
                 const Text(
@@ -75,10 +73,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       const SizedBox(height: 10),
                       TextFormField(
                         controller: _emailController,
+                        cursorColor: DesignSystem.mainGreen,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                color: DesignSystem.mainBlue, width: 2),
+                                color: DesignSystem.mainGreen, width: 2),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           prefixIcon: const Icon(
@@ -96,10 +95,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       TextFormField(
                         obscureText: obscureText,
                         controller: _passwdController,
+                        cursorColor: DesignSystem.mainGreen,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                color: DesignSystem.mainBlue, width: 2),
+                                color: DesignSystem.mainGreen, width: 2),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           prefixIcon: const Icon(Icons.lock_rounded,
@@ -140,95 +140,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
-                      const Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 2.0,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              "Or login with",
-                              style: DesignSystem.bodySmall,
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 2.0,
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        width: 80,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              backgroundColor: DesignSystem.white),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                                "assets/images/icons/logo_google.svg"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        width: 80,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              backgroundColor: DesignSystem.white),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                                "assets/images/icons/logo_facebook.svg"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        width: 80,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              backgroundColor: DesignSystem.white),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                                "assets/images/icons/logo_apple.svg"),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 const SizedBox(height: 30),
                 Row(
@@ -255,11 +168,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     const Spacer(),
                   ],
-                  // const Center(
-                  //   child: Text(
-                  //     "The first step towards a healthier life.",
-                  //     style: DesignSystem.bodyMedium,
-                  //   ),
                 ),
                 const SizedBox(height: 40),
                 const SafeArea(
@@ -281,7 +189,15 @@ class _SignInScreenState extends State<SignInScreen> {
   void _signIn() async {
     String email = _emailController.text;
     String password = _passwdController.text;
-    const CircularProgressIndicator();
+
+    showDialog(
+      context: context,
+      builder: (_) => const Center(
+        child: CircularProgressIndicator(
+          color: DesignSystem.mainGreen,
+        ),
+      ),
+    );
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -291,7 +207,6 @@ class _SignInScreenState extends State<SignInScreen> {
       );
       return;
     }
-    // Display a circular progress indicator
     setState(() {
       _isSignin = true;
     });
@@ -316,7 +231,6 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       );
 
-      // Remove the circular progress indicator and navigate to the home screen
       setState(() {
         _isSignin = false;
       });
@@ -332,47 +246,9 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       );
 
-      // Remove the circular progress indicator when login fails
       setState(() {
         _isSignin = false;
       });
     }
   }
-
-  // void _signIn() async {
-  //   String email = _emailController.text;
-  //   String password = _passwdController.text;
-
-  //   User? user = await _auth.signInWithEmailAndPassword(email, password);
-
-  //   if (user != null) {
-  //     CollectionReference collRef =
-  //         FirebaseFirestore.instance.collection('users_account');
-  //     QuerySnapshot querySnapshot =
-  //         await collRef.where('email', isEqualTo: email).get();
-
-  //     if (querySnapshot.docs.isNotEmpty) {
-  //       String username = querySnapshot.docs[0]['username'];
-  //       Provider.of<UserManager>(context, listen: false)
-  //           .setUserModel(UserModel(username: username, email: email));
-  //     }
-
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text("Account sign in successfully!"),
-  //       ),
-  //     );
-  //     Navigator.pushAndRemoveUntil(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => const BottomBar()),
-  //         (route) => false);
-  //   }
-  //   if (_emailController.text.isEmpty || _passwdController.text.isEmpty) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text("Please enter your email and password!"),
-  //       ),
-  //     );
-  //   }
-  // }
 }

@@ -5,8 +5,6 @@ import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_home/screen_home.dart';
 import 'package:miniproject/views/screen_maps/screen_maps.dart';
 import 'package:miniproject/views/screen_meals/screen_meals.dart';
-import 'package:miniproject/views/screen_meals/screen_planner_meals.dart';
-import 'package:miniproject/views/screen_progress/screen_progress_empty.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_main.dart';
 import 'package:miniproject/views/screen_settings/screen_settings.dart';
 import 'package:miniproject/views/screen_signIn/screen_signin.dart';
@@ -20,14 +18,13 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
     const HomeScreen(),
     const ProgresScreen(),
     const MealScreen(),
-    // MealPlanScreen(),
     const MapScreen(),
     const SettingScreen(),
   ];
@@ -50,66 +47,58 @@ class _BottomBarState extends State<BottomBar> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications),
-          ),
-          IconButton(
             onPressed: () {
               showModalBottomSheet(
                 context: context,
-                builder: (context) => Container(
-                  height: 500,
+                builder: (context) => SizedBox(
+                  height: 250,
                   width: double.infinity,
-                  child: Column(children: [
-                    const SizedBox(height: 30),
-                    const SizedBox(
-                      height: 60,
-                      width: 60,
-                      child: CircleAvatar(
-                        backgroundColor: DesignSystem.mainBlue,
-                        child: Icon(
-                          Icons.person,
-                          color: DesignSystem.white,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      const SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: CircleAvatar(
+                          backgroundColor: DesignSystem.mainBlue,
+                          child: Icon(
+                            Icons.person,
+                            color: DesignSystem.white,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Sign In As :",
-                      style: DesignSystem.headlineSmall,
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      "${userModel?.username}",
-                      style: DesignSystem.bodyLarge,
-                    ),
-                    Text("${userModel?.email}"),
-                    const SizedBox(height: 30),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: DesignSystem.mainRed),
-                        onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("You has been logout"),
-                            ),
-                          );
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (contex) => const SignInScreen()),
-                              (route) => false);
-                        },
-                        child: Text(
-                          "Logout",
-                          style: DesignSystem.headlineMediumWhite,
-                        ))
-                  ]),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Sign In As :",
+                        style: DesignSystem.headlineMedium,
+                      ),
+                      const SizedBox(height: 5),
+                      Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: DesignSystem.secondRed,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "${userModel?.username}",
+                            style: DesignSystem.headlineSmall,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "${userModel?.email}",
+                        style: DesignSystem.bodyMedium,
+                      ),
+                      const SizedBox(height: 30),
+                    ],
+                  ),
                 ),
               );
             },
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
           ),
         ],
       ),

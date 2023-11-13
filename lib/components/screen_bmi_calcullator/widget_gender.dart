@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/screen_bmi_calcullator/screen_bmi_result.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/models/bmi_calcullator/counter_bmi.dart';
@@ -34,6 +35,24 @@ class _GenderWidgetState extends State<GenderWidget> {
             decoration: BoxDecoration(
               color: DesignSystem.mainRed,
               borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "What Your BMI?\nCheck Now!",
+                    style: DesignSystem.headlineMediumWhite,
+                  ),
+                  const SizedBox(width: 50),
+                  SizedBox(
+                    height: 90,
+                    width: 90,
+                    child: Image.asset("assets/images/bmiScreen/bmi.png"),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -295,8 +314,7 @@ class _GenderWidgetState extends State<GenderWidget> {
           const SizedBox(height: 10),
           GestureDetector(
             onTap: () {
-              navigateToResult(12.0);
-              setState(() {});
+              navigateToResult();
             },
             child: Container(
               height: 50,
@@ -320,10 +338,9 @@ class _GenderWidgetState extends State<GenderWidget> {
     );
   }
 
-  void navigateToResult(double result) {
+  void navigateToResult() {
     CalculateBmi result = CalculateBmi(height: height, weight: weight);
-    setState(() {});
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => BmiResultScreen(
@@ -333,6 +350,5 @@ class _GenderWidgetState extends State<GenderWidget> {
         ),
       ),
     );
-    setState(() {});
   }
 }

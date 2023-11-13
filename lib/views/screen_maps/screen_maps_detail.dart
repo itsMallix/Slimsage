@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/models/maps_models/maps_favorite_provider.dart';
-import 'package:miniproject/views/screen_favorite/screen_favorite_places.dart';
 import 'package:miniproject/views/screen_maps/screen_Gmaps_detail.dart';
 import 'package:provider/provider.dart';
 
@@ -95,6 +94,11 @@ class MapDetailScreen extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       provider.toggleFavorite(placeData);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Place Added to Favorites"),
+                        ),
+                      );
                     },
                     icon: Icon(
                       Icons.favorite_rounded,
@@ -194,6 +198,11 @@ class MapDetailScreen extends StatelessWidget {
                           name: placeData['name'],
                           latitude: placeData['latitude'],
                           longitude: placeData['longitude'],
+                          address: placeData['address'],
+                          image: placeData['image'],
+                          rating: placeData['rating'],
+                          open: placeData['open'],
+                          close: placeData['close'],
                         ),
                       ),
                     );

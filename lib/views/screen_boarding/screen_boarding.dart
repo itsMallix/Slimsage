@@ -49,7 +49,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
           child: Column(
             children: [
               Expanded(
@@ -69,21 +69,22 @@ class _BoardingScreenState extends State<BoardingScreen> {
                 ),
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       ...List.generate(
                         onboardData.length,
                         (index) => Padding(
-                          padding: EdgeInsets.only(right: 5),
+                          padding: const EdgeInsets.only(right: 5),
                           child: DotIndicator(isActive: index == _pageIndex),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
-                  SizedBox(height: 20), // Spacer(),
+                  const SizedBox(height: 20),
                   SizedBox(
                     height: 60,
                     width: 200,
@@ -97,9 +98,9 @@ class _BoardingScreenState extends State<BoardingScreen> {
                             builder: (context) => const SignInScreen(),
                           ),
                         );
-                        // _pageController.nextPage(
-                        //     duration: Duration(milliseconds: 300),
-                        //     curve: Curves.ease);
+                        _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.ease);
                       },
                       child: const Text(
                         "Get Started",
@@ -107,7 +108,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 50),
                 ],
               )
             ],
@@ -133,7 +134,7 @@ class DotIndicator extends StatelessWidget {
       width: 20,
       decoration: BoxDecoration(
         color: isActive ? DesignSystem.mainRed : DesignSystem.secondRed,
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(12),
         ),
       ),
@@ -170,11 +171,6 @@ final List<Onboard> onboardData = [
     description:
         "With amazing inbuilt tools you can track your progress to achieve your goals",
   ),
-  Onboard(
-    image: "assets/images/onBoarding/onBoarding_2.png",
-    title: "Welcome to Slimsage",
-    description: "SlimSage to slim your body to be a person sage",
-  ),
 ];
 
 class OnboardingContent extends StatelessWidget {
@@ -194,7 +190,7 @@ class OnboardingContent extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 50),
-        Container(
+        SizedBox(
           height: 50,
           // decoration: BoxDecoration(color: Colors.amber),
           child: SvgPicture.asset(
@@ -225,7 +221,7 @@ class OnboardingContent extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        const Spacer(),
+        const SizedBox(height: 30),
       ],
     );
   }

@@ -1,7 +1,7 @@
 class UsageData {
-  int promptToken; // Input
-  int completionToken; // Output
-  int totalTokens; // Input + Output
+  int promptToken;
+  int completionToken;
+  int totalTokens;
 
   UsageData({
     required this.promptToken,

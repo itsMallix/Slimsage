@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:miniproject/components/screen_maps/maps_health.dart';
 import 'package:miniproject/components/screen_maps/maps_most_visited.dart';
 import 'package:miniproject/components/screen_maps/maps_popular.dart';
 import 'package:miniproject/components/theme.dart';
+import 'package:miniproject/views/screen_favorite/screen_favorite_places.dart';
 import 'package:miniproject/views/screen_maps/screen_Gmaps.dart';
 
 class MapScreen extends StatefulWidget {
@@ -22,19 +24,6 @@ class _MapScreenState extends State<MapScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 45,
-                width: double.infinity,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons.search),
-                    fillColor: DesignSystem.grey,
-                    filled: true,
-                    hintText: "Search Places",
-                  ),
-                ),
-              ),
               const SizedBox(height: 20),
               Container(
                 height: 100,
@@ -50,7 +39,8 @@ class _MapScreenState extends State<MapScreen> {
                       height: 90,
                       width: 90,
                       child: SvgPicture.asset(
-                          "assets/images/mapScreen/compass.svg"),
+                        "assets/images/mapScreen/compass.svg",
+                      ),
                     ),
                     const SizedBox(width: 20),
                     Padding(
@@ -74,7 +64,7 @@ class _MapScreenState extends State<MapScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const GmapsScreen(),
+                                  builder: (context) => FavoritePlaceScreen(),
                                 ),
                               );
                             },
@@ -112,6 +102,13 @@ class _MapScreenState extends State<MapScreen> {
               ),
               const SizedBox(height: 10),
               const BuildMostVisited(),
+              const SizedBox(height: 10),
+              const Text(
+                "Health Center Places",
+                style: DesignSystem.headlineSmall,
+              ),
+              const SizedBox(height: 10),
+              const BuildHealthPlace(),
             ],
           ),
         ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miniproject/components/theme.dart';
 import 'package:miniproject/models/database_models/database_provider.dart';
-import 'package:miniproject/models/progress_models/progress_provider.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_empty.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_item.dart';
 import 'package:miniproject/views/screen_progress/screen_progress_list.dart';

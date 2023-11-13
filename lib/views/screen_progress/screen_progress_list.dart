@@ -10,7 +10,7 @@ class ProgressList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progressItems = manager.progressModel;
+    // final progressItems = manager.progressModel;
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Consumer<DbManager>(

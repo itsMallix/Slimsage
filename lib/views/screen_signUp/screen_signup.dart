@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniproject/components/bottom_bar.dart';
 import 'package:miniproject/components/theme.dart';
-import 'package:miniproject/models/model_users.dart';
+import 'package:miniproject/models/user_models/model_users.dart';
 import 'package:miniproject/viewModels/viewModels_firebase_auth.dart';
 import 'package:miniproject/viewModels/viewModels_users.dart';
 import 'package:miniproject/views/screen_signIn/screen_signin.dart';
@@ -19,11 +19,12 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final FirebaseAuthService _auth = FirebaseAuthService();
-  var _formkey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
+  bool obscureText = true;
 
-  TextEditingController _unameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwdController = TextEditingController();
+  final TextEditingController _unameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwdController = TextEditingController();
 
   @override
   void dispose() {
@@ -71,6 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       TextFormField(
                         controller: _unameController,
+                        cursorColor: DesignSystem.mainGreen,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.person_rounded,
@@ -78,7 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                color: DesignSystem.mainBlue, width: 2),
+                                color: DesignSystem.mainGreen, width: 2),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           labelText: "Enter username",
@@ -91,6 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 10),
                       TextFormField(
                         controller: _emailController,
+                        cursorColor: DesignSystem.mainGreen,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.email_rounded,
@@ -98,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                color: DesignSystem.mainBlue, width: 2),
+                                color: DesignSystem.mainGreen, width: 2),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           labelText: "Enter email",
@@ -110,8 +113,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       const SizedBox(height: 10),
                       TextFormField(
-                        obscureText: true,
+                        obscureText: obscureText,
                         controller: _passwdController,
+                        cursorColor: DesignSystem.mainGreen,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.lock_rounded,
@@ -119,11 +123,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                                color: DesignSystem.mainBlue, width: 2),
+                                color: DesignSystem.mainGreen, width: 2),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           labelText: "Enter password",
                           labelStyle: DesignSystem.labelLarge,
+                          suffixIcon: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  obscureText = false;
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.remove_red_eye_rounded,
+                                color: DesignSystem.maingrey,
+                              ),
+                            ),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -134,104 +153,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 50,
                         width: double.infinity,
                         child: ElevatedButton(
+                          onPressed: _signUp,
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: DesignSystem.mainGreen),
                           child: const Text(
                             "SignUp",
                             style: DesignSystem.headlineMediumWhite,
                           ),
-                          onPressed: _signUp,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: DesignSystem.mainGreen),
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      const Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 2.0,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              "Or login with",
-                              style: DesignSystem.bodySmall,
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 2.0,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        width: 80,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              backgroundColor: DesignSystem.white),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                                "assets/images/icons/logo_google.svg"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        width: 80,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              backgroundColor: DesignSystem.white),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                                "assets/images/icons/logo_facebook.svg"),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        width: 80,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              backgroundColor: DesignSystem.white),
-                          onPressed: _signUp,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                                "assets/images/icons/logo_apple.svg"),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 const SizedBox(height: 30),
                 Row(
@@ -283,6 +215,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String email = _emailController.text;
     String password = _passwdController.text;
 
+    if (username.isEmpty || email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter all fields!"),
+        ),
+      );
+      return;
+    }
+
+    if (password.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Password must be at least 6 characters!"),
+        ),
+      );
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (_) => const Center(
+        child: CircularProgressIndicator(
+          color: DesignSystem.mainGreen,
+        ),
+      ),
+    );
+
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
     if (user != null) {
@@ -290,7 +249,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           FirebaseFirestore.instance.collection('users_account');
       collRef.add({"username": username, "email": email, "password": password});
 
-      // final userModel = UserModel(username: username);
       Provider.of<UserManager>(context, listen: false)
           .setUserModel(UserModel(username: username, email: email));
 
@@ -305,6 +263,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         (route) => false,
       );
     } else {
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Failed to create account!"),

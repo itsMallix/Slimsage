@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:miniproject/models/model_users.dart';
+import 'package:miniproject/models/user_models/model_users.dart';
 
 class UserManager with ChangeNotifier {
   UserModel? _userModel;
